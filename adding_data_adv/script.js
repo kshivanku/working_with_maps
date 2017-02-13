@@ -10,10 +10,15 @@ var customLayer = L.geoJson(null, {
     style: {
       "color": "#000000",
       "opacity": "0.5"
-    },
-    onEachFeature: function(feature,layer){
-      layer.bindPopup(feature.properties.date);
     }
 });
 omnivore.geojson('activities.geojson', null, customLayer).addTo(map);
-omnivore.geojson('places.geojson').addTo(map);
+
+
+//Adding points data
+var placeLayer = L.geoJson(null,{
+  onEachFeature: function(feature,layer){
+    layer.bindPopup(feature.properties.place.name);
+  }
+})
+omnivore.geojson('places.geojson',null,placeLayer).addTo(map);
