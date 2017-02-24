@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Map stuff</title>
+
+    <!-- Leaflet stuff -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-beta.2/leaflet.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-beta.2/leaflet.js"></script>
+
+    <!-- Google Map Stuff -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBF5U4HdsG2Nlvrhu9Hy0hxN5kxdL4SFZ0"></script>
+
+</head>
+
+<style media="screen">
+    body {
+        height: 100%;
+        width: 100%;
+    }
+
+    #carto_map, #googlemap_image, #googlemap_tiles {
+        width: 400px;
+        height: 500px;
+    }
+</style>
+
+<body>
+    <div id="carto_map"></div>
+    <div id="googlemap_image"></div>
+    <div id="googlemap_tiles"></div>
+    <script type="text/javascript">
+
+        //WORKING WITH LEAFLET FOR CARTO DB MAPS
+
+        var carto_map = L.map('carto_map');
+        carto_map.setView([40.706213526877455, -74.0044641494751], 15);
+        var tile_url = 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}@2x.png';
+        L.tileLayer(tile_url).addTo(carto_map);
+
+        //WORKING WITH GOOGLE MAPS
+
+        //Place a simple image
+        var mapElem = document.getElementById('googlemap_image');
+        var lat = 40.706213526877455;
+        var long = -74.0044641494751;
+        mapElem.innerHTML = '<img src="http://maps.googleapis.com/maps/api/staticmap?markers=' + lat + ',' + long + '&zoom=20&size=300x500&sensor=false" />';
+
+        //Place the complete google map
+        var mapOptions = {
+          center: { lat: 40.706213526877455, lng: -74.0044641494751},
+          zoom: 8
+        };
+        var google_map = new google.maps.Map(document.getElementById('googlemap_tiles'), mapOptions);
+
+    </script>
+</body>
+
+</html>
